@@ -75,10 +75,10 @@ end)
 CreateThread(function()
     local hour
     local minute = 0
-    local second = 0        --Add seconds for shadow smoothness
+    local second = 0 --Add seconds for shadow smoothness
     local timeIncrement = Config.RealTimeSync and 0.25 or 1
     local tick = GetGameTimer()
-    
+
     while true do
         if not disable then
             Wait(0)
@@ -97,9 +97,9 @@ CreateThread(function()
                 hour = hours
                 minute = minutes
             else
-                hour = math.floor(((baseTime+timeOffset)/60)%24)
-                if minute ~= math.floor((baseTime+timeOffset)%60) then  --Reset seconds to 0 when new minute
-                    minute = math.floor((baseTime+timeOffset)%60)
+                hour = math.floor(((baseTime + timeOffset) / 60) % 24)
+                if minute ~= math.floor((baseTime + timeOffset) % 60) then --Reset seconds to 0 when new minute
+                    minute = math.floor((baseTime + timeOffset) % 60)
                     second = 0
                 end
             end
