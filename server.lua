@@ -344,8 +344,11 @@ end)
 
 CreateThread(function()
     while true do
-        newWeatherTimer = newWeatherTimer - 1
-        Wait((1000 * 60) * Config.NewWeatherTimer)
+        Wait(60000)
+        if newWeatherTimer > 0 then
+            newWeatherTimer = newWeatherTimer - 1
+        end
+        
         if newWeatherTimer == 0 then
             if Config.DynamicWeather then
                 nextWeatherStage()

@@ -84,10 +84,12 @@ CreateThread(function()
             Wait(0)
             local _, _, _, hours, minutes, _ = GetLocalTime()
             local newBaseTime = baseTime
-            if tick - (Config.RealTimeSync and 500 or 22) > tick then
+        
+            if GetGameTimer() - tick > (Config.RealTimeSync and 500 or 22) then
                 second = second + timeIncrement
                 tick = GetGameTimer()
             end
+            
             if freezeTime then
                 timeOffset = timeOffset + baseTime - newBaseTime
                 second = 0
