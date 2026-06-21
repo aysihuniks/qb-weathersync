@@ -307,13 +307,8 @@ end, 'admin')
 
 -- THREAD LOOPS
 CreateThread(function()
-    local previous = 0
-    local realTimeFromApi = nil
-    local failedCount = 0
-
     while true do
         Wait(60000)                                           -- ⏱️ Sync server time every 1 minute with real time API. Falls back to OS time if failed.
-        local newBaseTime = os.time(os.date('!*t')) / 2 + 360 --Set the server time depending of OS time
         if Config.RealTimeSync then
             retrieveTimeFromApi(function(unixTime)
                 if unixTime then
@@ -344,11 +339,10 @@ end)
 
 CreateThread(function()
     while true do
-        Wait(60000)
+        Wait(60000) -- Check and decrement weather timer every 1 minute
         if newWeatherTimer > 0 then
             newWeatherTimer = newWeatherTimer - 1
         end
-        
         if newWeatherTimer == 0 then
             if Config.DynamicWeather then
                 nextWeatherStage()
